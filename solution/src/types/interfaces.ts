@@ -1,3 +1,5 @@
+import { CMD_NAMES } from './enums';
+
 interface IUI {
   showEnterCommandMsg(): void;
   showWelcomeMsg(): void;
@@ -11,7 +13,12 @@ interface ICommandInfo {
 }
 
 interface IController {
-  execute(command: string): void;
+  execute(command: string, isExternal?: boolean): void;
 }
 
-export { IUI, ICommandInfo, IController };
+type IInternalCommandsMap = {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  [value in CMD_NAMES]: Function; // TODO change later on normal type
+};
+
+export { IUI, ICommandInfo, IController, IInternalCommandsMap };

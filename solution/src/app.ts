@@ -13,7 +13,7 @@ class App {
     this.controller.execute(CMD_NAMES.GREETINGS);
 
     process.stdin.on('data', (data: string): void => {
-      this.controller.execute(data);
+      this.controller.execute(data, true);
       // TODO ask for further instructions
     });
 
