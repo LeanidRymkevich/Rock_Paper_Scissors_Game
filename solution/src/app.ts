@@ -14,12 +14,10 @@ class App {
 
     process.stdin.on('data', (data: string): void => {
       this.controller.execute(data, true);
-      // TODO ask for further instructions
     });
 
     process.on('SIGINT', () => {
       this.controller.execute(CMD_NAMES.EXIT);
-      process.exit(0);
     });
   }
 }

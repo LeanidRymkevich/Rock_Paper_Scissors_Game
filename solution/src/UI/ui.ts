@@ -13,6 +13,12 @@ export default class UI implements IUI {
   }
 
   public showFarewellMsg(): void {
+    console.log();
     console.log(MSG_TEXTS.FAREWELL);
+    process.exit(0);
+  }
+
+  public showHelpMsg(_command: string, moves: string[]): void {
+    console.log(moves);
   }
 }

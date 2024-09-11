@@ -7,8 +7,12 @@ enum MSG_TEXTS {
 enum CMD_NAMES {
   GREETINGS = 'greetings',
   EXIT = 'exit',
-  START = 'start',
   HELP = 'help',
 }
 
-export { MSG_TEXTS, CMD_NAMES };
+enum SPECIAL_MOVES {
+  EXIT = '0',
+  HELP = '?',
+}
+
+export { MSG_TEXTS, CMD_NAMES, SPECIAL_MOVES };

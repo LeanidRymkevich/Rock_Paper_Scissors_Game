@@ -1,14 +1,15 @@
 import { NoCommandError, CustomError } from '../errors/errors';
+import { CMD_NAMES, SPECIAL_MOVES } from '../types/enums';
+import { IController, IUI } from '../types/interfaces';
 import {
-  ICommandInfo,
-  IController,
+  Executable,
+  IExternalCommandsMap,
   IInternalCommandsMap,
-  IUI,
-} from '../types/interfaces';
+} from '../types/types';
 import UI from '../ui/ui';
 
 export default class Controller implements IController {
-  private readonly externalCommands: Record<string, ICommandInfo> = {};
+  private readonly externalCommands: IExternalCommandsMap;
   private readonly internalCommands: IInternalCommandsMap;
   private readonly moves: string[];
   private readonly ui: IUI;
@@ -16,21 +17,25 @@ export default class Controller implements IController {
   public constructor(moves: string[]) {
     this.moves = moves;
     this.ui = new UI();
-    this.addMovesToExternalCommands(moves); // TODO add commands for 0 and ? indexes
+    this.externalCommands = this.assignExternalCommands(moves);
+    this.internalCommands = this.assignInternalCommands();
   }
 
-  execute(command: string, isExternal: boolean = false): void {
+  public execute(command: string, isExternal: boolean = false): void {
     try {
       if (!isExternal) {
-        this.internalCommands[command](this.moves);
+        this.internalCommands[command as CMD_NAMES](
+          command,
+          this.moves,
+          this.ui
+        );
         return;
       }
 
-      const record: ICommandInfo = this.externalCommands[command];
+      const handler: Executable = this.externalCommands[command];
 
-      if (!record) throw new NoCommandError(command);
-
-      record.handler(this.moves);
+      if (!handler) throw new NoCommandError(command);
+      handler(command, this.moves, this.ui);
     } catch (error) {
       if (error instanceof CustomError) {
         console.log(error.message);
@@ -41,12 +46,24 @@ export default class Controller implements IController {
     }
   }
 
-  private addMovesToExternalCommands(moves: string[]): void {
+  private assignExternalCommands(moves: string[]): IExternalCommandsMap {
+    const result: IExternalCommandsMap = {};
+
     moves.forEach((move: string, idx: number): void => {
-      this.externalCommands[idx + 1] = {
-        name: move,
-        handler: (): void => console.log(move), // TODO add normal handler
-      };
+      result[idx + 1] = (): void => console.log(move); // TODO add normal handler
     });
+    result[SPECIAL_MOVES.EXIT] = this.ui.showFarewellMsg;
+    result[SPECIAL_MOVES.HELP] = this.ui.showHelpMsg;
+
+    return result;
+  }
+
+  private assignInternalCommands(): IInternalCommandsMap {
+    const result: IInternalCommandsMap = {};
+
+    result[CMD_NAMES.EXIT] = this.ui.showFarewellMsg;
+    result[CMD_NAMES.GREETINGS] = this.ui.showWelcomeMsg;
+
+    return result;
   }
 }
