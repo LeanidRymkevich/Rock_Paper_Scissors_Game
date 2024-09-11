@@ -1,5 +1,5 @@
-import MSG_TEXTS from 'src/types/enums';
-import { IUI } from 'src/types/interfaces';
+import { MSG_TEXTS } from '../types/enums';
+import { IUI } from '../types/interfaces';
 
 export default class UI implements IUI {
   public constructor() {}

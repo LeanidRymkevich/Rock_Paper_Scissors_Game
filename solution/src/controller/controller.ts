@@ -1,6 +1,6 @@
-import { CustomError, NoCommandError } from 'src/errors/errors';
-import { ICommandInfo, IController, IUI } from 'src/types/interfaces';
-import UI from 'src/UI/ui';
+import { NoCommandError, CustomError } from '../errors/errors';
+import { ICommandInfo, IController, IUI } from '../types/interfaces';
+import UI from '../ui/ui';
 
 export default class Controller implements IController {
   private readonly commandsMap: Record<string, ICommandInfo> = {};
