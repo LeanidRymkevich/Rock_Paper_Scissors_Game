@@ -4,4 +4,11 @@ enum MSG_TEXTS {
   FAREWELL = 'Farewell!',
 }
 
-export default MSG_TEXTS;
+enum CMD_NAMES {
+  GREETINGS = 'greetings',
+  EXIT = 'exit',
+  START = 'start',
+  HELP = 'help',
+}
+
+export { MSG_TEXTS, CMD_NAMES };
