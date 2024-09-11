@@ -9,4 +9,8 @@ interface IController {
   execute(command: string, isExternal?: boolean): void;
 }
 
-export { IUI, IController };
+interface IValidator {
+  validate(): boolean;
+}
+
+export { IUI, IController, IValidator };
