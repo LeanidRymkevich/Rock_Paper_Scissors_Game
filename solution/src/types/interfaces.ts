@@ -1,3 +1,5 @@
+import { Table } from 'console-table-printer';
+
 import { ValidationError } from '../errors/errors';
 
 interface IUI {
@@ -16,4 +18,8 @@ interface IValidator {
   validate(): boolean;
 }
 
-export { IUI, IController, IValidator };
+interface IMovesTable {
+  getCommandsTable(): Table;
+}
+
+export { IUI, IController, IValidator, IMovesTable };
