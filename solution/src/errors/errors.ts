@@ -27,13 +27,13 @@ class NoMovesProvidedError extends ValidationError {
 
 class SmallMoveNumberError extends ValidationError {
   public constructor() {
-    super('Wrong move number. It must be odd number >=3.');
+    super('Wrong move number. It must be odd number >= 3.');
   }
 }
 
 class EvenMoveNumberError extends ValidationError {
   public constructor() {
-    super('Even move number has been provided! It must be odd!');
+    super('Even number of moves has been provided! It must be odd!');
   }
 }
 

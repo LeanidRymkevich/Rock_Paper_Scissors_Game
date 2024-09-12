@@ -1,12 +1,13 @@
-import { NoCommandError, CustomError } from '../errors/errors';
+import { NoCommandError, CustomError, ValidationError } from '../errors/errors';
 import { CMD_NAMES, SPECIAL_MOVES } from '../types/enums';
-import { IController, IUI } from '../types/interfaces';
+import { IController, IUI, IValidator } from '../types/interfaces';
 import {
   Executable,
   IExternalCommandsMap,
   IInternalCommandsMap,
 } from '../types/types';
 import UI from '../ui/ui';
+import Validator from '../validator/validator';
 
 export default class Controller implements IController {
   private readonly externalCommands: IExternalCommandsMap;
@@ -17,6 +18,7 @@ export default class Controller implements IController {
   public constructor(moves: string[]) {
     this.moves = moves;
     this.ui = new UI();
+    this.validateMoves(moves);
     this.externalCommands = this.assignExternalCommands(moves);
     this.internalCommands = this.assignInternalCommands();
   }
@@ -40,6 +42,20 @@ export default class Controller implements IController {
       if (error instanceof CustomError) {
         console.log(error.message);
         // TODO do something else
+      } else {
+        throw error;
+      }
+    }
+  }
+
+  public validateMoves(moves: string[]): void {
+    const validator: IValidator = new Validator(moves);
+
+    try {
+      validator.validate();
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        this.ui.showValidationError(error);
       } else {
         throw error;
       }

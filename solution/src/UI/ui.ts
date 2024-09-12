@@ -1,3 +1,4 @@
+import { ValidationError } from '../errors/errors';
 import { MSG_TEXTS } from '../types/enums';
 import { IUI } from '../types/interfaces';
 
@@ -20,5 +21,11 @@ export default class UI implements IUI {
 
   public showHelpMsg(_command: string, moves: string[]): void {
     console.log(moves);
+  }
+
+  public showValidationError(error: ValidationError): void {
+    console.log(error.message);
+    console.log(MSG_TEXTS.WRONG_MOVES_ARGS);
+    process.exit(0);
   }
 }

@@ -19,14 +19,18 @@ export default class Validator implements IValidator {
     return true;
   }
 
-  private checkMovesNum(): void {
+  private checkMovesNum(): boolean {
     if (this.moves.length === 0) throw new NoMovesProvidedError();
     if (this.moves.length <= 1) throw new SmallMoveNumberError();
     if (this.moves.length % 2 === 0) throw new EvenMoveNumberError();
+
+    return true;
   }
 
-  private checkForMatches(): void {
+  private checkForMatches(): boolean {
     if (this.moves.length !== new Set(this.moves).size)
       throw new RepeatedMovesError();
+
+    return true;
   }
 }
