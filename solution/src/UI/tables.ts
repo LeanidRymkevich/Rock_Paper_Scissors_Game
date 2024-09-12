@@ -77,4 +77,19 @@ export default class MovesTable implements IMovesTable {
       vertical: colorFunc('║'),
     };
   }
+
+  public getGameMatrix(): boolean[][] {
+    const result: boolean[][] = [];
+
+    for (let i = 0; i < this.moves.length; i++) {
+      const row: boolean[] = [];
+
+      for (let j = 0; j < this.moves.length; j++) {
+        row.push(j === 0);
+      }
+      result.push(row);
+    }
+
+    return result;
+  }
 }

@@ -5,6 +5,8 @@ import { IController } from './types/interfaces';
 class App {
   private readonly controller: IController;
 
+  // TODO consider the possibility of initializing all big instances here and then to pass them into each other if necessary
+
   public constructor() {
     this.controller = new Controller(process.argv.slice(2));
   }

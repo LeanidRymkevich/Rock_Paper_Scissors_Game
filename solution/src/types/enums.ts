@@ -19,4 +19,10 @@ enum SPECIAL_MOVES {
   HELP = '?',
 }
 
-export { MSG_TEXTS, CMD_NAMES, SPECIAL_MOVES };
+enum GAME_RESULT {
+  WIN = 'WIN',
+  LOSE = 'LOSE',
+  DRAW = 'DRAW',
+}
+
+export { MSG_TEXTS, CMD_NAMES, SPECIAL_MOVES, GAME_RESULT };
