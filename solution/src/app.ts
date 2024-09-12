@@ -14,7 +14,7 @@ class App {
     this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
 
     process.stdin.on('data', (data: string): void => {
-      this.controller.execute(data, true);
+      this.controller.execute(data.toString().trim(), true);
       this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
     });
 
