@@ -1,5 +1,6 @@
 enum MSG_TEXTS {
-  ENTER_CMD = 'Please enter next command > ',
+  AVAILABLE_MOVES = 'Available moves:',
+  ENTER_CMD = 'Please enter the index of your move > ',
   WELCOME = 'Welcome to Generalized Rock-Paper-Scissors Game!',
   FAREWELL = 'Farewell!',
   WRONG_MOVES_ARGS = 'While app launching there must be provided non-repeated moves-arguments, number of which is odd and >= 3. Please restart app with correct params.',
@@ -10,6 +11,7 @@ enum CMD_NAMES {
   EXIT = 'exit',
   HELP = 'help',
   FAILED_VALIDATION = 'failed_validation',
+  ENTER_YOUR_MOVE = 'enter_your_move',
 }
 
 enum SPECIAL_MOVES {

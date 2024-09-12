@@ -79,6 +79,7 @@ export default class Controller implements IController {
 
     result[CMD_NAMES.EXIT] = this.ui.showFarewellMsg;
     result[CMD_NAMES.GREETINGS] = this.ui.showWelcomeMsg;
+    result[CMD_NAMES.ENTER_YOUR_MOVE] = this.ui.showEnterCommandMsg;
 
     return result;
   }
