@@ -2,7 +2,7 @@ enum MSG_TEXTS {
   ENTER_CMD = 'Please enter next command > ',
   WELCOME = 'Welcome to Generalized Rock-Paper-Scissors Game!',
   FAREWELL = 'Farewell!',
-  WRONG_MOVES_ARGS = 'While app launching there must be provided moves-arguments, number of which is odd and >= 3. Please restart app with correct params.',
+  WRONG_MOVES_ARGS = 'While app launching there must be provided non-repeated moves-arguments, number of which is odd and >= 3. Please restart app with correct params.',
 }
 
 enum CMD_NAMES {

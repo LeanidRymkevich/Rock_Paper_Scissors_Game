@@ -16,6 +16,7 @@ export default class Validator implements IValidator {
   public validate(): boolean {
     this.checkMovesNum();
     this.checkForMatches();
+
     return true;
   }
 
