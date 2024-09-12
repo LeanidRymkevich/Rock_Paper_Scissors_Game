@@ -1,3 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+// const colors = require('@larchanka/colors-js');
+
+import { green, red, bgRed } from '@larchanka/colors-js';
+
 import { ValidationError } from '../errors/errors';
 import { MSG_TEXTS } from '../types/enums';
 import { IUI } from '../types/interfaces';
@@ -10,12 +15,12 @@ export default class UI implements IUI {
   }
 
   public showWelcomeMsg(): void {
-    console.log(MSG_TEXTS.WELCOME);
+    console.log(green(MSG_TEXTS.WELCOME));
   }
 
   public showFarewellMsg(): void {
     console.log();
-    console.log(MSG_TEXTS.FAREWELL);
+    console.log(green(MSG_TEXTS.FAREWELL));
     process.exit(0);
   }
 
@@ -24,8 +29,8 @@ export default class UI implements IUI {
   }
 
   public showValidationError(error: ValidationError): void {
-    console.log(error.message);
-    console.log(MSG_TEXTS.WRONG_MOVES_ARGS);
+    console.log(red(error.message));
+    console.log(bgRed(MSG_TEXTS.WRONG_MOVES_ARGS));
     process.exit(0);
   }
 }
