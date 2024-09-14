@@ -8,8 +8,7 @@ import UI from './UI/ui';
 class App {
   private readonly controller: IController;
 
-  // TODO 4. Optimize ui functions
-  // TODO 5. Hash calculating!!!
+  // TODO refactor ui
   // TODO 6. Add file with launch instructions
 
   public constructor() {

@@ -14,7 +14,7 @@ export default class HMACGenerator implements IHMACGenerator {
 
   public getHMAC(move: string): string {
     const encoding: BinaryToTextEncoding = 'hex';
-    return createHmac(HMACGenerator.ALGORISM, this.key)
+    return createHmac(HMACGenerator.ALGORISM, this.getKeyString())
       .update(move)
       .digest(encoding);
   }

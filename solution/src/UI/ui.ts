@@ -9,6 +9,8 @@ import TableCreator from './tables/tableCreator';
 import { GAME_RESULT, MSG_TEXTS } from '../types/enums';
 import { IGame, ITableCreator, IUI } from '../types/interfaces';
 
+const CHECK_HMAC_LINK = 'https://cryptotools.net/hmac';
+
 export default class UI implements IUI {
   private readonly moves: string[];
   private readonly tableCreator: ITableCreator;
@@ -33,8 +35,11 @@ export default class UI implements IUI {
     console.log(bold.blue(MSG_TEXTS.YOUR_MOVE) + this.moves[userMoveIdx]);
     console.log(bold.blue(MSG_TEXTS.PC_MOVE) + this.game.getPCMove());
     this.showGameResult(userMoveIdx);
-    this.printWithEmptyLineBelow(
+    console.log(
       bold.blue(MSG_TEXTS.HMAC_KEY) + cyan.underline(this.game.getHMACKey())
+    );
+    this.printWithEmptyLineBelow(
+      bold.blue(MSG_TEXTS.CHECK_LINK) + cyan.underline.italic(CHECK_HMAC_LINK)
     );
     this.printWithEmptyLineBelow(italic.magenta(MSG_TEXTS.TRY_AGAIN_OR_LEAVE));
     this.startGameAgain();

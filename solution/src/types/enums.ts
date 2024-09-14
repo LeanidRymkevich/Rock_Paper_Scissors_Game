@@ -1,4 +1,5 @@
 enum MSG_TEXTS {
+  CHECK_LINK = 'Check hmac link: ',
   TRY_AGAIN_OR_LEAVE = 'To try again or to leave chose option from moves below.',
   GAME_RESULTS = 'Game ends with your ',
   YOU = 'You ',
@@ -12,7 +13,8 @@ enum MSG_TEXTS {
   ENTER_CMD = `Please enter your next move's`,
   WELCOME = 'Welcome to Generalized Rock-Paper-Scissors Game!',
   FAREWELL = 'Farewell!',
-  WRONG_MOVES_ARGS = 'While app launching there must be provided non-repeated moves-arguments, number of which is odd and >= 3. Please, restart app with correct params.',
+  WRONG_MOVES_ARGS = 'While app launching there must be provided non-repeated moves-arguments, ' +
+    'number of which is odd and >= 3. Please, restart app with correct params.',
   WRONG_ENTERED_MOVE = 'Please, enter a move INDEX from the table below.',
 }
 
