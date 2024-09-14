@@ -10,6 +10,7 @@ import TableSettingsBuilder from './tableSettingsBuilder';
 import ColumnSettingsBuilder from './columnSettingsBuilder';
 
 const TABLE_CONTENT_ALIGNMENT = 'center';
+const HELP_TABLE_CORNER_TEXT = '⇩ PC\\User ⇨';
 
 const COMMAND_TABLE_COLUMN_SETTINGS: ColumnOptionsRaw[] = [
   new ColumnSettingsBuilder()
@@ -30,4 +31,4 @@ const COMMAND_TABLE_SETTINGS: ComplexOptions = new TableSettingsBuilder()
   .setColumnSettings(COMMAND_TABLE_COLUMN_SETTINGS)
   .build();
 
-export { COMMAND_TABLE_SETTINGS };
+export { COMMAND_TABLE_SETTINGS, HELP_TABLE_CORNER_TEXT };

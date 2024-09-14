@@ -5,15 +5,20 @@ import {
   COMMAND_TABLE_COLUMN_TITLES,
   SPECIAL_MOVES,
 } from '../../types/enums';
-import { ITableCreator } from '../../types/interfaces';
+import { IGame, ITableCreator } from '../../types/interfaces';
 
-import { COMMAND_TABLE_SETTINGS } from './tableConstants';
+import {
+  COMMAND_TABLE_SETTINGS,
+  HELP_TABLE_CORNER_TEXT,
+} from './tableConstants';
 
 export default class TableCreator implements ITableCreator {
   private readonly moves: string[];
+  private readonly game: IGame;
 
-  public constructor(moves: string[]) {
+  public constructor(moves: string[], game: IGame) {
     this.moves = moves;
+    this.game = game;
   }
 
   public getCommandsTable(): Table {
@@ -37,18 +42,26 @@ export default class TableCreator implements ITableCreator {
     return table;
   }
 
-  public getGameMatrix(): boolean[][] {
-    const result: boolean[][] = [];
+  public getHelpTable(): Table {
+    const table: Table = new Table();
+    const length: number = this.moves.length;
 
-    for (let i = 0; i < this.moves.length; i++) {
-      const row: boolean[] = [];
-
-      for (let j = 0; j < this.moves.length; j++) {
-        row.push(j === 0);
+    for (let i = 0; i < length; i++) {
+      const row = {};
+      for (let j = 0; j <= length; j++) {
+        if (j === 0) {
+          row[HELP_TABLE_CORNER_TEXT] = this.moves[i];
+        } else {
+          row[this.moves[j - 1]] = this.game.solveGameResult(
+            this.moves,
+            i,
+            j - 1
+          );
+        }
       }
-      result.push(row);
+      table.addRow(row);
     }
 
-    return result;
+    return table;
   }
 }

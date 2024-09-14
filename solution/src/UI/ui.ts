@@ -13,7 +13,7 @@ export default class UI implements IUI {
   public constructor(moves: string[], game: IGame) {
     this.moves = moves;
     this.game = game;
-    this.tableCreator = new TableCreator(moves);
+    this.tableCreator = new TableCreator(moves, game);
   }
 
   public showEnterCommandMsg(): void {

@@ -11,14 +11,6 @@ type InternalCommandsMap = {
   [value in CMD_NAMES]?: Executable;
 };
 
-type GameResultSign = -1 | 0 | 1;
-
 type Alignment = 'center' | 'left' | 'right';
 
-export {
-  Executable,
-  ExternalCommandsMap,
-  InternalCommandsMap,
-  GameResultSign,
-  Alignment,
-};
+export { Executable, ExternalCommandsMap, InternalCommandsMap, Alignment };

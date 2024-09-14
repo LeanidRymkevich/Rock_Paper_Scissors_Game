@@ -40,6 +40,11 @@ interface IGame {
   startNewGame(): void;
   getHMAC(): string;
   getHMACKey(): string;
+  solveGameResult(
+    moves: string[],
+    userMoveIdx: number,
+    pcMoveIdx: number
+  ): GAME_RESULT;
   getGameResult(userMoveIdx: number): GAME_RESULT;
 }
 

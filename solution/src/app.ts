@@ -2,6 +2,7 @@
 // import { CMD_NAMES } from './types/enums';
 // import { IController } from './types/interfaces';
 
+import Game from './game/game';
 import TableCreator from './UI/tables/tableCreator';
 
 // class App {
@@ -30,4 +31,6 @@ import TableCreator from './UI/tables/tableCreator';
 
 // new App().launch();
 
-new TableCreator(['one', 'two', 'three']).getCommandsTable().printTable();
+const moves = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+const game = new Game(moves);
+new TableCreator(moves, game).getHelpTable().printTable();
