@@ -14,9 +14,9 @@ interface IUI {
   proposeActions(_command: string, moves: string[]): void;
   welcome(): void;
   startGame(): void;
-  showFarewellMsg(): void;
-  showHelpMsg(_command: string, moves: string[]): void;
-  showValidationError(error: ValidationError): void;
+  sayGoodbye(): void;
+  help(): void;
+  finishWithError(error: ValidationError): void;
   finishGame(move: string): void;
 }
 

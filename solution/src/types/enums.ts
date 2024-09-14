@@ -16,11 +16,11 @@ enum MSG_TEXTS {
 }
 
 enum CMD_NAMES {
-  GREETINGS = 'greetings',
+  WELCOME = 'greetings',
   EXIT = 'exit',
   HELP = 'help',
   FAILED_VALIDATION = 'failed_validation',
-  ENTER_YOUR_MOVE = 'enter_your_move',
+  START_GAME = 'start',
 }
 
 enum SPECIAL_MOVES {

@@ -29,6 +29,7 @@ export default class UI implements IUI {
 
   public finishGame(move: string): void {
     const userMoveIdx: number = +move - 1;
+    console.log();
     console.log(bold.blue(MSG_TEXTS.YOUR_MOVE) + this.moves[userMoveIdx]);
     console.log(bold.blue(MSG_TEXTS.PC_MOVE) + this.game.getPCMove());
     this.showGameResult(userMoveIdx);
@@ -50,18 +51,20 @@ export default class UI implements IUI {
     this.printWithEmptyLineBelow(green.bold(MSG_TEXTS.WELCOME));
   }
 
-  public showFarewellMsg(): void {
+  public sayGoodbye(): void {
     console.log();
     console.log(green.bold(MSG_TEXTS.FAREWELL));
     process.exit(0);
   }
 
-  public showHelpMsg(): void {
+  public help(): void {
+    console.log();
     this.tableCreator.getHelpTable().printTable();
+    console.log();
     this.proposeActions();
   }
 
-  public showValidationError(error: ValidationError): void {
+  public finishWithError(error: ValidationError): void {
     console.log(red(error.message));
     console.log(red.bold.italic.underline(MSG_TEXTS.WRONG_MOVES_ARGS));
     process.exit(0);

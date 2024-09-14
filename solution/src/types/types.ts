@@ -1,7 +1,6 @@
 import { CMD_NAMES } from './enums';
-import { IUI } from './interfaces';
 
-type Executable = (command: string, moves: string[], ui: IUI) => void;
+type Executable = (command: string) => void;
 
 type ExternalCommandsMap = {
   [key: string]: Executable;

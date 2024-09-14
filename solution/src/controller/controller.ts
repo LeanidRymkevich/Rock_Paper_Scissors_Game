@@ -1,4 +1,6 @@
 import { NoCommandError, CustomError, ValidationError } from '../errors/errors';
+import Validator from '../validator/validator';
+
 import { CMD_NAMES, SPECIAL_MOVES } from '../types/enums';
 import { IController, IUI, IValidator } from '../types/interfaces';
 import {
@@ -6,8 +8,6 @@ import {
   ExternalCommandsMap,
   InternalCommandsMap,
 } from '../types/types';
-import UI from '../ui/ui';
-import Validator from '../validator/validator';
 
 // TODO controller must be fully rewritten according to new GAME-> UI model
 export default class Controller implements IController {
@@ -16,29 +16,25 @@ export default class Controller implements IController {
   private readonly moves: string[];
   private readonly ui: IUI;
 
-  public constructor(moves: string[]) {
+  public constructor(moves: string[], ui: IUI) {
     this.moves = moves;
-    this.ui = new UI();
+    this.ui = ui;
     this.validateMoves(moves);
-    this.externalCommands = this.assignExternalCommands(moves);
+    this.externalCommands = this.assignExternalCommands();
     this.internalCommands = this.assignInternalCommands();
   }
 
   public execute(command: string, isExternal: boolean = false): void {
     try {
       if (!isExternal) {
-        this.internalCommands[command as CMD_NAMES](
-          command,
-          this.moves,
-          this.ui
-        );
+        this.internalCommands[command as CMD_NAMES](command);
         return;
       }
 
       const handler: Executable = this.externalCommands[command];
 
       if (!handler) throw new NoCommandError(command);
-      handler(command, this.moves, this.ui);
+      handler(command);
     } catch (error) {
       if (error instanceof CustomError) {
         console.log(error.message);
@@ -56,21 +52,21 @@ export default class Controller implements IController {
       validator.validate();
     } catch (error) {
       if (error instanceof ValidationError) {
-        this.ui.showValidationError(error);
+        this.ui.finishWithError(error);
       } else {
         throw error;
       }
     }
   }
 
-  private assignExternalCommands(moves: string[]): ExternalCommandsMap {
+  private assignExternalCommands(): ExternalCommandsMap {
     const result: ExternalCommandsMap = {};
 
-    moves.forEach((move: string, idx: number): void => {
-      result[idx + 1] = (): void => console.log(move); // TODO add normal handler
+    this.moves.forEach((_move: string, idx: number): void => {
+      result[idx + 1] = this.ui.finishGame.bind(this.ui);
     });
-    result[SPECIAL_MOVES.EXIT] = this.ui.showFarewellMsg;
-    result[SPECIAL_MOVES.HELP] = this.ui.showHelpMsg;
+    result[SPECIAL_MOVES.EXIT] = this.ui.sayGoodbye.bind(this.ui);
+    result[SPECIAL_MOVES.HELP] = this.ui.help.bind(this.ui);
 
     return result;
   }
@@ -78,9 +74,9 @@ export default class Controller implements IController {
   private assignInternalCommands(): InternalCommandsMap {
     const result: InternalCommandsMap = {};
 
-    result[CMD_NAMES.EXIT] = this.ui.showFarewellMsg;
-    result[CMD_NAMES.GREETINGS] = this.ui.showWelcomeMsg;
-    result[CMD_NAMES.ENTER_YOUR_MOVE] = this.ui.showEnterCommandMsg;
+    result[CMD_NAMES.EXIT] = this.ui.sayGoodbye.bind(this.ui);
+    result[CMD_NAMES.WELCOME] = this.ui.welcome.bind(this.ui);
+    result[CMD_NAMES.START_GAME] = this.ui.startGame.bind(this.ui);
 
     return result;
   }
