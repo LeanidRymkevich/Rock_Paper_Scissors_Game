@@ -4,10 +4,11 @@ import {
   RepeatedMovesError,
   SmallMoveNumberError,
 } from '../errors/errors';
+
 import { IValidator } from '../types/interfaces';
 
 export default class Validator implements IValidator {
-  private moves: string[];
+  private readonly moves: string[];
 
   public constructor(moves: string[]) {
     this.moves = moves;

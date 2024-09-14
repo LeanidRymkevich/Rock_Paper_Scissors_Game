@@ -9,7 +9,6 @@ import {
   InternalCommandsMap,
 } from '../types/types';
 
-// TODO controller must be fully rewritten according to new GAME-> UI model
 export default class Controller implements IController {
   private readonly externalCommands: ExternalCommandsMap;
   private readonly internalCommands: InternalCommandsMap;
@@ -37,15 +36,14 @@ export default class Controller implements IController {
       handler(command);
     } catch (error) {
       if (error instanceof CustomError) {
-        console.log(error.message);
-        // TODO do something else
+        this.ui.showWrongMoveError(error);
       } else {
         throw error;
       }
     }
   }
 
-  public validateMoves(moves: string[]): void {
+  private validateMoves(moves: string[]): void {
     const validator: IValidator = new Validator(moves);
 
     try {

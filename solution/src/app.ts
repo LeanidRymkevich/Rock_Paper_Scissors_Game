@@ -8,7 +8,11 @@ import UI from './UI/ui';
 class App {
   private readonly controller: IController;
 
-  // TODO add validation here?
+  // TODO 3. Optimize handlers map for not special user moves
+  // TODO 4. Optimize ui functions
+  // TODO 5. Hash calculating!!!
+  // TODO 6. Add file with launch instructions
+
   public constructor() {
     const moves: string[] = process.argv.slice(2);
     const game = new Game(moves);

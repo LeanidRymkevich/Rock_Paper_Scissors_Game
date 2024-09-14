@@ -64,10 +64,19 @@ export default class UI implements IUI {
     this.proposeActions();
   }
 
+  public showWrongMoveError(error: Error): void {
+    this.printErrorMsg(error, MSG_TEXTS.WRONG_ENTERED_MOVE);
+    this.proposeActions();
+  }
+
   public finishWithError(error: ValidationError): void {
-    console.log(red(error.message));
-    console.log(red.bold.italic.underline(MSG_TEXTS.WRONG_MOVES_ARGS));
+    this.printErrorMsg(error, MSG_TEXTS.WRONG_MOVES_ARGS);
     process.exit(0);
+  }
+
+  private printErrorMsg(error: Error, clue: string): void {
+    console.log(red(error.message));
+    this.printWithEmptyLineBelow(red.bold.italic.underline(clue));
   }
 
   private startGameAgain(): void {

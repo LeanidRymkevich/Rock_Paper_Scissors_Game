@@ -18,6 +18,7 @@ interface IUI {
   help(): void;
   finishWithError(error: ValidationError): void;
   finishGame(move: string): void;
+  showWrongMoveError(error: Error): void;
 }
 
 interface IController {
