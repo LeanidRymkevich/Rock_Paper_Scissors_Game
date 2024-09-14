@@ -3,12 +3,14 @@ import { IUI } from './interfaces';
 
 type Executable = (command: string, moves: string[], ui: IUI) => void;
 
-type IExternalCommandsMap = {
+type ExternalCommandsMap = {
   [key: string]: Executable;
 };
 
-type IInternalCommandsMap = {
+type InternalCommandsMap = {
   [value in CMD_NAMES]?: Executable;
 };
 
-export { Executable, IExternalCommandsMap, IInternalCommandsMap };
+type GameResultSign = -1 | 0 | 1;
+
+export { Executable, ExternalCommandsMap, InternalCommandsMap, GameResultSign };

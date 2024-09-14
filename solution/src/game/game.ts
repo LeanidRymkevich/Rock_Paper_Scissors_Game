@@ -2,6 +2,7 @@ import HMACGenerator from './hmacgenerator';
 
 import { GAME_RESULT } from '../types/enums';
 import { IGame, IHMACGenerator } from '../types/interfaces';
+import { GameResultSign } from '../types/types';
 
 export default class Game implements IGame {
   private readonly moves: string[];
@@ -13,6 +14,18 @@ export default class Game implements IGame {
     this.moves = moves;
     this.hmac = new HMACGenerator();
     this.pcMoveIdx = this.getPCMove();
+  }
+
+  public static getGameResultSign(
+    moves: string[],
+    userMoveIdx: number,
+    pcMoveIdx: number
+  ): GameResultSign {
+    const length = moves.length;
+    const half = Math.floor(moves.length / 2);
+    return Math.sign(
+      ((pcMoveIdx - userMoveIdx + half + length) % length) - half
+    ) as GameResultSign;
   }
 
   public startNewGame(): void {
@@ -29,10 +42,10 @@ export default class Game implements IGame {
   }
 
   public getGameResult(userMoveIdx: number): GAME_RESULT {
-    const length = this.moves.length;
-    const half = Math.floor(this.moves.length / 2);
-    const sign: number = Math.sign(
-      ((this.pcMoveIdx - userMoveIdx + half + length) % length) - half
+    const sign: GameResultSign = Game.getGameResultSign(
+      this.moves,
+      userMoveIdx,
+      this.pcMoveIdx
     );
 
     return !sign

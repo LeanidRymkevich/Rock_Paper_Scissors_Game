@@ -3,15 +3,15 @@ import { CMD_NAMES, SPECIAL_MOVES } from '../types/enums';
 import { IController, IUI, IValidator } from '../types/interfaces';
 import {
   Executable,
-  IExternalCommandsMap,
-  IInternalCommandsMap,
+  ExternalCommandsMap,
+  InternalCommandsMap,
 } from '../types/types';
 import UI from '../ui/ui';
 import Validator from '../validator/validator';
 
 export default class Controller implements IController {
-  private readonly externalCommands: IExternalCommandsMap;
-  private readonly internalCommands: IInternalCommandsMap;
+  private readonly externalCommands: ExternalCommandsMap;
+  private readonly internalCommands: InternalCommandsMap;
   private readonly moves: string[];
   private readonly ui: IUI;
 
@@ -62,8 +62,8 @@ export default class Controller implements IController {
     }
   }
 
-  private assignExternalCommands(moves: string[]): IExternalCommandsMap {
-    const result: IExternalCommandsMap = {};
+  private assignExternalCommands(moves: string[]): ExternalCommandsMap {
+    const result: ExternalCommandsMap = {};
 
     moves.forEach((move: string, idx: number): void => {
       result[idx + 1] = (): void => console.log(move); // TODO add normal handler
@@ -74,8 +74,8 @@ export default class Controller implements IController {
     return result;
   }
 
-  private assignInternalCommands(): IInternalCommandsMap {
-    const result: IInternalCommandsMap = {};
+  private assignInternalCommands(): InternalCommandsMap {
+    const result: InternalCommandsMap = {};
 
     result[CMD_NAMES.EXIT] = this.ui.showFarewellMsg;
     result[CMD_NAMES.GREETINGS] = this.ui.showWelcomeMsg;
