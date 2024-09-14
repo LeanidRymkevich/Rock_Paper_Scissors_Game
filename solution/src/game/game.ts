@@ -12,12 +12,16 @@ export default class Game implements IGame {
   public constructor(moves: string[]) {
     this.moves = moves;
     this.hmac = new HMACGenerator();
-    this.pcMoveIdx = this.getPCMove();
+    this.pcMoveIdx = this.generatePCMove();
   }
 
   public startNewGame(): void {
-    this.pcMoveIdx = this.getPCMove();
+    this.pcMoveIdx = this.generatePCMove();
     this.hmac.updateKey();
+  }
+
+  public getPCMove(): string {
+    return this.moves[this.pcMoveIdx];
   }
 
   public getHMAC(): string {
@@ -50,7 +54,7 @@ export default class Game implements IGame {
     return this.solveGameResult(this.moves, userMoveIdx, this.pcMoveIdx);
   }
 
-  private getPCMove(): number {
+  private generatePCMove(): number {
     return Math.floor(Math.random() * this.moves.length);
   }
 }

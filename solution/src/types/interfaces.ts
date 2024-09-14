@@ -11,11 +11,13 @@ import { Alignment } from './types';
 import { ValidationError } from '../errors/errors';
 
 interface IUI {
-  showEnterCommandMsg(_command: string, moves: string[]): void;
-  showWelcomeMsg(): void;
+  proposeActions(_command: string, moves: string[]): void;
+  welcome(): void;
+  startGame(): void;
   showFarewellMsg(): void;
   showHelpMsg(_command: string, moves: string[]): void;
   showValidationError(error: ValidationError): void;
+  finishGame(move: string): void;
 }
 
 interface IController {
@@ -28,6 +30,7 @@ interface IValidator {
 
 interface ITableCreator {
   getCommandsTable(): Table;
+  getHelpTable();
 }
 
 interface IHMACGenerator {
@@ -46,6 +49,7 @@ interface IGame {
     pcMoveIdx: number
   ): GAME_RESULT;
   getGameResult(userMoveIdx: number): GAME_RESULT;
+  getPCMove(): string;
 }
 
 interface IColumnSettingsBuilder {

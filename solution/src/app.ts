@@ -3,34 +3,37 @@
 // import { IController } from './types/interfaces';
 
 import Game from './game/game';
-import TableCreator from './UI/tables/tableCreator';
+import UI from './UI/ui';
 
-// class App {
-//   private readonly controller: IController;
+class App {
+  // private readonly controller: IController;
 
-//   // TODO consider the possibility of initializing all big instances here and then to pass them into each other if necessary
+  // TODO consider the possibility of initializing all big instances here and then to pass them into each other if necessary
 
-//   public constructor() {
-//     this.controller = new Controller(process.argv.slice(2));
-//   }
+  public constructor() {
+    // this.controller = new Controller(process.argv.slice(2));
+  }
 
-//   public launch(): void {
-//     this.controller.execute(CMD_NAMES.GREETINGS);
-//     this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
+  public launch(): void {
+    const moves = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
+    const game = new Game(moves);
+    const ui = new UI(moves, game);
 
-//     process.stdin.on('data', (data: string): void => {
-//       this.controller.execute(data.toString().trim(), true);
-//       this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
-//     });
+    ui.welcome();
+    ui.showHelpMsg();
+    // this.controller.execute(CMD_NAMES.GREETINGS);
+    // this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
 
-//     process.on('SIGINT', () => {
-//       this.controller.execute(CMD_NAMES.EXIT);
-//     });
-//   }
-// }
+    process.stdin.on('data', (data: string): void => {
+      // this.controller.execute(data.toString().trim(), true);
+      // this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
+    });
 
-// new App().launch();
+    process.on('SIGINT', () => {
+      // this.controller.execute(CMD_NAMES.EXIT);
+      process.exit(0);
+    });
+  }
+}
 
-const moves = ['one', 'two', 'three', 'four', 'five', 'six', 'seven'];
-const game = new Game(moves);
-new TableCreator(moves, game).getHelpTable().printTable();
+new App().launch();
