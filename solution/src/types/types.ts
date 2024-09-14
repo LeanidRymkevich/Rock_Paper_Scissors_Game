@@ -1,15 +1,11 @@
-import { CMD_NAMES } from './enums';
+import { COMMANDS } from './enums';
 
 type Executable = (command: string) => void;
 
-type ExternalCommandsMap = {
-  [key: string]: Executable;
-};
-
-type InternalCommandsMap = {
-  [value in CMD_NAMES]?: Executable;
+type CommandsMap = {
+  [value in COMMANDS]: Executable;
 };
 
 type Alignment = 'center' | 'left' | 'right';
 
-export { Executable, ExternalCommandsMap, InternalCommandsMap, Alignment };
+export { Executable, CommandsMap, Alignment };

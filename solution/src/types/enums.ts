@@ -16,17 +16,12 @@ enum MSG_TEXTS {
   WRONG_ENTERED_MOVE = 'Please, enter a move INDEX from the table below.',
 }
 
-enum CMD_NAMES {
+enum COMMANDS {
   WELCOME = 'greetings',
-  EXIT = 'exit',
-  HELP = 'help',
-  FAILED_VALIDATION = 'failed_validation',
-  START_GAME = 'start',
-}
-
-enum SPECIAL_MOVES {
   EXIT = '0',
   HELP = '?',
+  START_GAME = 'start',
+  FINISH_GAME = 'finish',
 }
 
 enum GAME_RESULT {
@@ -40,10 +35,4 @@ enum COMMAND_TABLE_COLUMN_TITLES {
   MOVES_NAME = `Move's name`,
 }
 
-export {
-  MSG_TEXTS,
-  CMD_NAMES,
-  SPECIAL_MOVES,
-  GAME_RESULT,
-  COMMAND_TABLE_COLUMN_TITLES,
-};
+export { MSG_TEXTS, COMMANDS, GAME_RESULT, COMMAND_TABLE_COLUMN_TITLES };

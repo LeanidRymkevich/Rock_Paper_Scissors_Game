@@ -4,11 +4,20 @@ import {
 } from 'console-table-printer/dist/src/models/external-table';
 import { ForegroundColor } from 'chalk';
 
-import { COMMAND_TABLE_COLUMN_TITLES, MSG_TEXTS } from '../../types/enums';
+import {
+  COMMAND_TABLE_COLUMN_TITLES,
+  COMMANDS,
+  MSG_TEXTS,
+} from '../../types/enums';
 
 import ColumnSettingsCreator from './columnSettingsBuilder';
 import TableSettingsBuilder from './tableSettingsBuilder';
 import ColumnSettingsBuilder from './columnSettingsBuilder';
+
+const SPECIAL_COMMANDS_NAMES: Record<COMMANDS.EXIT | COMMANDS.HELP, string> = {
+  [COMMANDS.EXIT]: 'exit',
+  [COMMANDS.HELP]: 'help',
+};
 
 const TABLE_CONTENT_ALIGNMENT = 'center';
 const HELP_TABLE_CORNER_TEXT = '⇩ PC \\ User ⇨';
@@ -52,4 +61,5 @@ export {
   HELP_TABLE_CORNER_TEXT,
   HELP_TABLE_SETTINGS,
   HELP_TABLE_VALUE_COLOR,
+  SPECIAL_COMMANDS_NAMES,
 };

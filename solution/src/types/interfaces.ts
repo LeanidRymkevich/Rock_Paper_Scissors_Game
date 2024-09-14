@@ -22,7 +22,7 @@ interface IUI {
 }
 
 interface IController {
-  execute(command: string, isExternal?: boolean): void;
+  execute(command: string): void;
 }
 
 interface IValidator {

@@ -1,10 +1,6 @@
 import { Table } from 'console-table-printer';
 
-import {
-  CMD_NAMES,
-  COMMAND_TABLE_COLUMN_TITLES,
-  SPECIAL_MOVES,
-} from '../../types/enums';
+import { COMMANDS, COMMAND_TABLE_COLUMN_TITLES } from '../../types/enums';
 import { IGame, ITableCreator } from '../../types/interfaces';
 
 import {
@@ -12,6 +8,7 @@ import {
   HELP_TABLE_CORNER_TEXT,
   HELP_TABLE_SETTINGS,
   HELP_TABLE_VALUE_COLOR,
+  SPECIAL_COMMANDS_NAMES,
 } from './tableConstants';
 
 export default class TableCreator implements ITableCreator {
@@ -33,12 +30,14 @@ export default class TableCreator implements ITableCreator {
       });
     });
     table.addRow({
-      [COMMAND_TABLE_COLUMN_TITLES.INDEX]: SPECIAL_MOVES.EXIT,
-      [COMMAND_TABLE_COLUMN_TITLES.MOVES_NAME]: CMD_NAMES.EXIT,
+      [COMMAND_TABLE_COLUMN_TITLES.INDEX]: COMMANDS.EXIT,
+      [COMMAND_TABLE_COLUMN_TITLES.MOVES_NAME]:
+        SPECIAL_COMMANDS_NAMES[COMMANDS.EXIT],
     });
     table.addRow({
-      [COMMAND_TABLE_COLUMN_TITLES.INDEX]: SPECIAL_MOVES.HELP,
-      [COMMAND_TABLE_COLUMN_TITLES.MOVES_NAME]: CMD_NAMES.HELP,
+      [COMMAND_TABLE_COLUMN_TITLES.INDEX]: COMMANDS.HELP,
+      [COMMAND_TABLE_COLUMN_TITLES.MOVES_NAME]:
+        SPECIAL_COMMANDS_NAMES[COMMANDS.HELP],
     });
 
     return table;

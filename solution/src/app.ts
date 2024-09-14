@@ -1,5 +1,5 @@
 import Controller from './controller/controller';
-import { CMD_NAMES } from './types/enums';
+import { COMMANDS } from './types/enums';
 import { IController } from './types/interfaces';
 
 import Game from './game/game';
@@ -8,7 +8,6 @@ import UI from './UI/ui';
 class App {
   private readonly controller: IController;
 
-  // TODO 3. Optimize handlers map for not special user moves
   // TODO 4. Optimize ui functions
   // TODO 5. Hash calculating!!!
   // TODO 6. Add file with launch instructions
@@ -21,15 +20,15 @@ class App {
   }
 
   public launch(): void {
-    this.controller.execute(CMD_NAMES.WELCOME);
-    this.controller.execute(CMD_NAMES.START_GAME);
+    this.controller.execute(COMMANDS.WELCOME);
+    this.controller.execute(COMMANDS.START_GAME);
 
     process.stdin.on('data', (data: string): void => {
-      this.controller.execute(data.toString().trim(), true);
+      this.controller.execute(data.toString().trim());
     });
 
     process.on('SIGINT', () => {
-      this.controller.execute(CMD_NAMES.EXIT);
+      this.controller.execute(COMMANDS.EXIT);
     });
   }
 }
