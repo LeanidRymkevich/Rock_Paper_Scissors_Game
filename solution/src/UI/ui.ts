@@ -2,17 +2,22 @@ import { green, red } from 'chalk';
 
 import { ValidationError } from '../errors/errors';
 import { MSG_TEXTS } from '../types/enums';
-import { IUI } from '../types/interfaces';
-import MovesTable from './tables';
-import { Table } from 'console-table-printer';
+import { IGame, ITableCreator, IUI } from '../types/interfaces';
+import TableCreator from './tables/tableCreator';
 
 export default class UI implements IUI {
-  public constructor() {}
+  private readonly moves: string[];
+  private readonly tableCreator: ITableCreator;
+  private readonly game: IGame;
 
-  public showEnterCommandMsg(_command: string, moves: string[]): void {
-    const table: Table = new MovesTable(moves).getCommandsTable();
+  public constructor(moves: string[], game: IGame) {
+    this.moves = moves;
+    this.game = game;
+    this.tableCreator = new TableCreator(moves);
+  }
 
-    table.printTable();
+  public showEnterCommandMsg(): void {
+    this.tableCreator.getCommandsTable().printTable();
     process.stdout.write(MSG_TEXTS.ENTER_CMD);
   }
 

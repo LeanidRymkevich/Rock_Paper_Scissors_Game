@@ -9,6 +9,7 @@ import {
 import UI from '../ui/ui';
 import Validator from '../validator/validator';
 
+// TODO controller must be fully rewritten according to new GAME-> UI model
 export default class Controller implements IController {
   private readonly externalCommands: ExternalCommandsMap;
   private readonly internalCommands: InternalCommandsMap;

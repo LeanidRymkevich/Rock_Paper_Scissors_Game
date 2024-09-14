@@ -13,4 +13,12 @@ type InternalCommandsMap = {
 
 type GameResultSign = -1 | 0 | 1;
 
-export { Executable, ExternalCommandsMap, InternalCommandsMap, GameResultSign };
+type Alignment = 'center' | 'left' | 'right';
+
+export {
+  Executable,
+  ExternalCommandsMap,
+  InternalCommandsMap,
+  GameResultSign,
+  Alignment,
+};
