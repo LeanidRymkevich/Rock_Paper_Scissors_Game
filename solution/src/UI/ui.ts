@@ -32,6 +32,9 @@ export default class UI implements IUI {
     console.log(bold.blue(MSG_TEXTS.YOUR_MOVE) + this.moves[userMoveIdx]);
     console.log(bold.blue(MSG_TEXTS.PC_MOVE) + this.game.getPCMove());
     this.showGameResult(userMoveIdx);
+    this.printWithEmptyLineBelow(
+      bold.blue(MSG_TEXTS.HMAC_KEY) + cyan.underline(this.game.getHMACKey())
+    );
     this.printWithEmptyLineBelow(italic.magenta(MSG_TEXTS.TRY_AGAIN_OR_LEAVE));
     this.startGameAgain();
   }
@@ -81,7 +84,7 @@ export default class UI implements IUI {
         : result === GAME_RESULT.LOSE
           ? 'red'
           : 'green';
-    this.printWithEmptyLineBelow(
+    console.log(
       bold.blue(MSG_TEXTS.GAME_RESULTS) + chalk[resultColor](result) + '!'
     );
   }

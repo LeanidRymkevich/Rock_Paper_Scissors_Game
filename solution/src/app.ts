@@ -20,7 +20,8 @@ class App {
     const ui = new UI(moves, game);
 
     ui.welcome();
-    ui.showHelpMsg();
+    ui.startGame();
+    ui.finishGame('1');
     // this.controller.execute(CMD_NAMES.GREETINGS);
     // this.controller.execute(CMD_NAMES.ENTER_YOUR_MOVE); //TODO may be move from here later
 

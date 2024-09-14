@@ -5,6 +5,7 @@ enum MSG_TEXTS {
   YOUR_MOVE = 'Your move: ',
   PC_MOVE = 'Computer move: ',
   HMAC = 'HMAC: ',
+  HMAC_KEY = 'HMAC key: ',
   INDEX = 'index',
   AVAILABLE_MOVES = 'Available moves:',
   HELP_TABLE_TITLE = 'Win-lose-draw moves matrix:',
