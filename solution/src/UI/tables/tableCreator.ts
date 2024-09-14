@@ -10,6 +10,8 @@ import { IGame, ITableCreator } from '../../types/interfaces';
 import {
   COMMAND_TABLE_SETTINGS,
   HELP_TABLE_CORNER_TEXT,
+  HELP_TABLE_SETTINGS,
+  HELP_TABLE_VALUE_COLOR,
 } from './tableConstants';
 
 export default class TableCreator implements ITableCreator {
@@ -43,7 +45,7 @@ export default class TableCreator implements ITableCreator {
   }
 
   public getHelpTable(): Table {
-    const table: Table = new Table();
+    const table: Table = new Table(HELP_TABLE_SETTINGS);
     const length: number = this.moves.length;
 
     for (let i = 0; i < length; i++) {
@@ -59,7 +61,7 @@ export default class TableCreator implements ITableCreator {
           );
         }
       }
-      table.addRow(row);
+      table.addRow(row, { color: HELP_TABLE_VALUE_COLOR });
     }
 
     return table;

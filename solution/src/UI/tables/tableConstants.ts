@@ -2,6 +2,7 @@ import {
   ColumnOptionsRaw,
   ComplexOptions,
 } from 'console-table-printer/dist/src/models/external-table';
+import { ForegroundColor } from 'chalk';
 
 import { COMMAND_TABLE_COLUMN_TITLES, MSG_TEXTS } from '../../types/enums';
 
@@ -10,7 +11,8 @@ import TableSettingsBuilder from './tableSettingsBuilder';
 import ColumnSettingsBuilder from './columnSettingsBuilder';
 
 const TABLE_CONTENT_ALIGNMENT = 'center';
-const HELP_TABLE_CORNER_TEXT = '⇩ PC\\User ⇨';
+const HELP_TABLE_CORNER_TEXT = '⇩ PC \\ User ⇨';
+const HELP_TABLE_VALUE_COLOR: typeof ForegroundColor = 'magenta';
 
 const COMMAND_TABLE_COLUMN_SETTINGS: ColumnOptionsRaw[] = [
   new ColumnSettingsBuilder()
@@ -31,4 +33,23 @@ const COMMAND_TABLE_SETTINGS: ComplexOptions = new TableSettingsBuilder()
   .setColumnSettings(COMMAND_TABLE_COLUMN_SETTINGS)
   .build();
 
-export { COMMAND_TABLE_SETTINGS, HELP_TABLE_CORNER_TEXT };
+const HELP_TABLE_COLUMN_SETTINGS: ColumnOptionsRaw[] = [
+  new ColumnSettingsBuilder()
+    .setAlignment(TABLE_CONTENT_ALIGNMENT)
+    .setColor('cyan')
+    .setName(HELP_TABLE_CORNER_TEXT)
+    .build(),
+];
+
+const HELP_TABLE_SETTINGS: ComplexOptions = new TableSettingsBuilder()
+  .setTitle(MSG_TEXTS.HELP_TABLE_TITLE)
+  .setBorderColor('yellow')
+  .setColumnSettings(HELP_TABLE_COLUMN_SETTINGS)
+  .build();
+
+export {
+  COMMAND_TABLE_SETTINGS,
+  HELP_TABLE_CORNER_TEXT,
+  HELP_TABLE_SETTINGS,
+  HELP_TABLE_VALUE_COLOR,
+};

@@ -1,5 +1,6 @@
 enum MSG_TEXTS {
   AVAILABLE_MOVES = 'Available moves:',
+  HELP_TABLE_TITLE = 'Win-lose-draw moves matrix:',
   ENTER_CMD = 'Please enter the index of your move > ',
   WELCOME = 'Welcome to Generalized Rock-Paper-Scissors Game!',
   FAREWELL = 'Farewell!',
