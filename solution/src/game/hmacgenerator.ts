@@ -1,8 +1,11 @@
 import { getRandomValues, createHmac, BinaryToTextEncoding } from 'crypto';
 
-export default class HMACGenerator {
+import { IHMACGenerator } from '../types/interfaces';
+
+export default class HMACGenerator implements IHMACGenerator {
   private static readonly ALGORISM = 'SHA3-256';
   private static readonly MIN_BIT_NUMBER = 256;
+
   private key: Uint8Array;
 
   public constructor() {
@@ -24,7 +27,7 @@ export default class HMACGenerator {
     );
   }
 
-  public updateKey() {
+  public updateKey(): void {
     this.key = this.generateKey();
   }
 

@@ -1,35 +1,48 @@
-import { GAME_RESULT } from '../types/enums';
+import HMACGenerator from './hmacgenerator';
 
-export default class Game {
+import { GAME_RESULT } from '../types/enums';
+import { IGame, IHMACGenerator } from '../types/interfaces';
+
+export default class Game implements IGame {
   private readonly moves: string[];
+  private readonly hmac: IHMACGenerator;
+
+  private pcMoveIdx: number;
 
   public constructor(moves: string[]) {
     this.moves = moves;
+    this.hmac = new HMACGenerator();
+    this.pcMoveIdx = this.getPCMove();
   }
 
-  public getMovesMatrix(): number[][] {
-    const result = [];
+  public startNewGame(): void {
+    this.pcMoveIdx = this.getPCMove();
+    this.hmac.updateKey();
+  }
+
+  public getHMAC(): string {
+    return this.hmac.getHMAC(this.moves[this.pcMoveIdx]);
+  }
+
+  public getHMACKey(): string {
+    return this.hmac.getKeyString();
+  }
+
+  public getGameResult(userMoveIdx: number): GAME_RESULT {
     const length = this.moves.length;
     const half = Math.floor(this.moves.length / 2);
+    const sign: number = Math.sign(
+      ((this.pcMoveIdx - userMoveIdx + half + length) % length) - half
+    );
 
-    for (let i = 0; i < length; i++) {
-      const row = new Array(length);
-      for (let j = 0; j < length; j++) {
-        row[j] = Math.sign(((j - i + half + length) % length) - half);
-      }
-      result.push(row);
-    }
-    return result;
-  }
-
-  public getGameResult(userMove: string, computerMove: string): GAME_RESULT {
-    const matrix: number[][] = this.getMovesMatrix();
-    const result: number = matrix[+computerMove][+userMove];
-
-    return !result
+    return !sign
       ? GAME_RESULT.DRAW
-      : result < 0
+      : sign < 0
         ? GAME_RESULT.LOSE
         : GAME_RESULT.WIN;
+  }
+
+  private getPCMove(): number {
+    return Math.floor(Math.random() * this.moves.length);
   }
 }
