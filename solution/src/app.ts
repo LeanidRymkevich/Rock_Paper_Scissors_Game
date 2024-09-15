@@ -8,9 +8,6 @@ import UI from './UI/ui';
 class App {
   private readonly controller: IController;
 
-  // TODO refactor ui
-  // TODO 6. Add file with launch instructions
-
   public constructor() {
     const moves: string[] = process.argv.slice(2);
     const game = new Game(moves);
